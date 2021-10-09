@@ -2,40 +2,53 @@ extends Spatial
 
 onready var body = get_node("RigidBody")
 onready var camera_gimble = get_node("CameraGimble")
+onready var floor_collider = get_node("FloorCollider")
 
-#func _input(event):	
-#	if event.is_action_pressed("jump") and is_on_floor():
-#		jump()
+var floor_contacts := 0
+
+var new_max_vel = 0.0
+var new_min_vel = 10000.0
+var median_vel = []
+
 var force = 0.0
+var on_the_ground = false
 
-func _process(delta):
+func _process(_delta):
 	
 	camera_gimble.translation = body.translation
 	
 	if Input.is_action_pressed("jump"):
 		jump()
 		
-func _physics_process(delta):
-#	if body.linear_velocity.x > 10:
-#		force -= 0.1
-#	elif body.linear_velocity.x < 10:
-#		force += 0.1
-#	else:
-#		force = 0.0
-#	body.add_central_force(Vector3(force, 0, 0))
+func _physics_process(_delta):
+	if body.linear_velocity.x <= 10:
+		force += 0.2
+	else:
+		force = 0.0
+		
+	body.add_central_force(Vector3(force, 0, 0))
 	
-	print("Acceleration : " + String(force) + " Velocity: " + String(body.linear_velocity.x))
-
-#func _physics_process(delta):
-#	velocity.y += GRAVITY * delta
-#	velocity.x = SPEED
-#	print(is_on_floor())
-#
-#	velocity = move_and_slide(velocity, Vector3.UP)
+	on_the_ground = floor_contacts
+#	if not on_the_ground : print(on_the_ground)
 
 
 func jump():
-	
-	if body.linear_velocity.y <= 1.0 and body.linear_velocity.y >= -1.0:
+	if not on_the_ground:
+		return
+	else:
 		body.linear_velocity.y = 20.0
 		body.angular_velocity.z = -4.0
+
+
+func _on_FloorCollider_body_entered(body):
+	print("Touched Something")
+	if body.is_in_group("floor"):
+		print("Touched floor")
+		floor_contacts += 1
+
+
+func _on_FloorCollider_body_exited(body):
+	print("Left Something")
+	if body.is_in_group("floor"):
+		print("Left floor")
+		floor_contacts -= 1

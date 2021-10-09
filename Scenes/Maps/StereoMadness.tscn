@@ -8,7 +8,9 @@ size = Vector3( 500, 0.5, 5 )
 
 [node name="StereoMadness" type="Spatial"]
 
-[node name="Floor" type="StaticBody" parent="."]
+[node name="Floor" type="StaticBody" parent="." groups=[
+"floor",
+]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 247, -0.25, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
