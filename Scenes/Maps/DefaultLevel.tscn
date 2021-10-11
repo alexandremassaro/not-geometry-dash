@@ -8,7 +8,7 @@ extents = Vector3( 25, 0.25, 5 )
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 50, 0.5, 10 )
 
-[node name="StereoMadness" type="Spatial"]
+[node name="DefaultLevel" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="Floor" type="StaticBody" parent="." groups=[
