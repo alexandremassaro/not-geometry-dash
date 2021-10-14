@@ -43,9 +43,9 @@ func _input(event):
 
 
 func _physics_process(delta):
-	apply_movement()
-	apply_gravity(delta)
-	update_snap_vector()
+#	apply_movement()
+#	apply_gravity(delta)
+#	update_snap_vector()
 	jump()
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP)
 

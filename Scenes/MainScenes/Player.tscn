@@ -50,4 +50,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="ObstacleCollider"]
 shape = SubResource( 4 )
+
 [connection signal="body_entered" from="ObstacleCollider" to="." method="_on_ObstacleCollider_body_entered"]

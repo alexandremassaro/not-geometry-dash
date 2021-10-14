@@ -1,6 +1,7 @@
 extends Spatial
 
-export (PackedScene) var player_scene = preload("res://Scenes/MainScenes/Player.tscn")
+#export (PackedScene) var player_scene = preload("res://Scenes/MainScenes/Player.tscn")
+export (PackedScene) var player_scene = preload("res://Scenes/MainScenes/PlayerRigid.tscn")
 
 onready var player
 onready var game_over_menu = get_node("GameOver")
